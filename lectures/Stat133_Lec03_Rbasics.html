@@ -65,7 +65,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <pre class="r"><code>2 * pi # multiply by a constant</code></pre>
 <pre><code>## [1] 6.283185</code></pre>
 <pre class="r"><code>7 + runif(1) # add a random number</code></pre>
-<pre><code>## [1] 7.018843</code></pre>
+<pre><code>## [1] 7.94187</code></pre>
 <pre class="r"><code>3^4 # powers</code></pre>
 <pre><code>## [1] 81</code></pre>
 <pre class="r"><code>sqrt(4^4) # functions</code></pre>
@@ -137,7 +137,7 @@ depts</code></pre>
 nums &lt;- c(1.1, 3, -5.7)
 devs &lt;- rnorm(5)
 devs</code></pre>
-<pre><code>## [1]  0.4368676 -0.8473819  0.6730164 -2.1250701  0.5300219</code></pre>
+<pre><code>## [1] -1.7866569 -0.6279685 -0.2851314 -0.9018921  1.5654340</code></pre>
 <pre class="r"><code># integer vector
 ints &lt;- c(1L, 5L, -3L) # force storage as integer not decimal number
 # 'L' is for 'long integer' (historical)
@@ -185,8 +185,8 @@ vals &lt;- rnorm(100)
 # How does R process these next subset operations?
 vals[vals &lt; 0] &lt;- 0
 vals[1:8]</code></pre>
-<pre><code>## [1] 0.9627894 0.1509511 0.0000000 0.0000000 0.0000000 0.4232425 0.0000000
-## [8] 0.0000000</code></pre>
+<pre><code>## [1] 0.28918424 0.00000000 0.58495573 0.13768514 1.23174108 0.01081166
+## [7] 0.24983163 0.00000000</code></pre>
 <pre class="r"><code>set.seed(0)  # make random number generation repeatable
 vals &lt;- rnorm(100)
 extremes &lt;- vals[vals &gt; 3]
