@@ -85,7 +85,7 @@ wr.name <- wr1500m[wr1500m$times == min(wr1500m$times),][4]
 
 times_sec <- wr1500m$times + 180
 wr1500m$times_sec <- times_sec
-plot(wr1500m$year,wr1500m$times_sec) 
+plot(wr1500m$year,wr1500m$times_sec, type='s') 
 
 
 
@@ -100,7 +100,7 @@ plot(wr1500m$year,wr1500m$times_sec)
 wr1500m$month[is.na(wr1500m$month)] <- .5
 new_year <- wr1500m$year + wr1500m$month/12
 wr1500m$new_year <- new_year
-plot(1500m$new_year, wr1500m$times_sec)
+plot(wr1500m$new_year, wr1500m$times_sec, type='s')
 
 
 # Q3. The current world record was set in 1998. If we want to
@@ -111,9 +111,8 @@ plot(1500m$new_year, wr1500m$times_sec)
 # so that 2014 is included in the x-axis scale;
 # then use the lines() function to add the additional segment.
 
-# wr_1998 <- your code here
-# plot( your code here )
-# lines( your code here )
+plot(wr1500m$new_year, wr1500m$times_sec, xlim=c(wr1500m$new_year[1],2014), type='s')
+lines(c(1998, 2014),c(min(wr1500m$times_sec), min(wr1500m$times_sec)))
 
 
 # Q4. There are two times where the record stood for several
