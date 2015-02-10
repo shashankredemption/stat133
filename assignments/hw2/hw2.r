@@ -71,7 +71,8 @@ wr.name <- wr1500m[wr1500m$times == min(wr1500m$times),][4]
 # Let's look at the relationship between date and time.
 # Q1c. What type of variable (numeric (continuous or discrete), nominal ordinal)
 # are year and times? (no need to save the output, just look at it)
-
+#Year is numeric discrete
+#Time is numeric continuous
 
 # When we are examining a variable to see how it changes in time,
 # we typically make a line plot, with time on the x-axes and 
@@ -127,18 +128,24 @@ lines(c(1998, 2014),c(min(wr1500m$times_sec), min(wr1500m$times_sec)))
 # Also, do not type in the athlete's name. Instead, use subsetting
 # of wr1500m$athlete to access it.
 
-# wr_1944 <- your code here
-# abline( your code here )
-# abline( your code here )
-# text( your code here )
-# text( your code here )
-
+abline(v = 1998, col ="grey")
+abline(v = 1944, col ="grey")
+text(1935, y = 235, labels = droplevels(wr1500m$athlete[26]), adj = .5, cex = .5)
+text(1986, y = 216, labels = droplevels(wr1500m[n.wr,"athlete"]), adj = .5, cex = .5)
 
 # Q5. Now we are ready to add other contextual information.
 # Remake the plot as before but now adding axis labels and a title.
 # This is the FINAL version of the plot of world record times.
-
 # put your final version of the plotting commands below.
+
+plot(wr1500m$new_year, wr1500m$times_sec, xlim=c(wr1500m$new_year[1],2014), main = "Evolution of 1500m World Records", xlab = 
+       "Year", ylab = "Times",  type='s')
+lines(c(1998, 2014),c(min(wr1500m$times_sec), min(wr1500m$times_sec)))
+abline(v = 1998, col ="grey")
+abline(v = 1944, col ="grey")
+text(1935, y = 235, labels = droplevels(wr1500m$athlete[26]), adj = .5, cex = .5)
+text(1986, y = 216, labels = droplevels(wr1500m[n.wr,"athlete"]), adj = .5, cex = .5)
+
 
 ## You have finised the first plot!!
 
@@ -154,8 +161,7 @@ lines(c(1998, 2014),c(min(wr1500m$times_sec), min(wr1500m$times_sec)))
 # The data frame SO2012Ctry contains this information.
 # It can be loaded into R with
 
-# load( your code here )
-
+load("SummerOlympics2012Ctry.rda")
 
 #Q6 Take a look at the variables in this data frame.
 # What kind of variable is GDP and population?
@@ -176,7 +182,7 @@ lines(c(1998, 2014),c(min(wr1500m$times_sec), min(wr1500m$times_sec)))
 # Consider which of the three principles of good graphics this
 # plot violates and why.
 
-# plot( your code here )
+plot(SO2012Ctry$GDP, SO2012Ctry$pop)
 
 
 ### Data stand out, Values are plotted on the top of each other  
@@ -190,10 +196,9 @@ lines(c(1998, 2014),c(min(wr1500m$times_sec), min(wr1500m$times_sec)))
 # symbols() where the area of the circle is proportional to the 
 # total number of medals.
 
-# GDP_per_person <- your code here
-# SO2012Ctry <- your code here
-# symbols( your code here )
-
+GDP_per_person <- SO2012Ctry$GDP/SO2012Ctry$pop
+SO2012Ctry$GDP_per_person <- GDP_per_person
+symbols(log(SO2012Ctry$GDP_per_person), y = log(SO2012Ctry$pop), circles = SO2012Ctry$Total/2)
 
 # Q8. It appears that the countries with no medals are circles too.
 # Remake the plot, this time using *only the countries that won medals*. 
@@ -202,13 +207,21 @@ lines(c(1998, 2014),c(min(wr1500m$times_sec), min(wr1500m$times_sec)))
 # plotting character.
 
 # your plotting code here
+symbols(log(SO2012Ctry[SO2012Ctry$Total > 0,]$GDP_per_person), y = log(SO2012Ctry[SO2012Ctry$Total > 0,]$pop), circles = SO2012Ctry[SO2012Ctry$Total > 0,]$Total/2)
+symbols(log(SO2012Ctry[SO2012Ctry$Total == 0,]$GDP_per_person), y = log(SO2012Ctry[SO2012Ctry$Total == 0,]$pop), add=TRUE, circles = SO2012Ctry[SO2012Ctry$Total == 0,]$Total/2)
 
 # Q9. Make the plot information rich by adding axis labels, 
 # title, and label 5 of the more interesting points
 # with the country name. Use text() to do this.
 
-# top5 <- order( your code here )
-# your plotting code here, including a new call to text() 
+top5 <- SO2012Ctry[which(SO2012Ctry$pop > 180000000),]
+symbols(log(SO2012Ctry[SO2012Ctry$Total > 0,]$GDP_per_person), y = log(SO2012Ctry[SO2012Ctry$Total > 0,]$pop), circles = SO2012Ctry[SO2012Ctry$Total > 0,]$Total, xlab="GDP Per Capita", ylab = "Population", main="Relationship between GDP Per Capita, Population, and Olympic Medals Won")
+symbols(log(SO2012Ctry[SO2012Ctry$Total == 0,]$GDP_per_person), y = log(SO2012Ctry[SO2012Ctry$Total == 0,]$pop), add=TRUE, circles = SO2012Ctry[SO2012Ctry$Total > 0,]$Total)
+text(9.45, y= 19.1, "BRA", adj =.5, cex = .5)
+text(8.6, y= 21.0, "CHN", adj = .5, cex = .5)
+text(8.2, y= 19.15, "IDN", adj = .5, cex = .5)
+text(7.3, y= 20.75, "IND", adj = .5, cex = .5)
+text(10.8, y = 19.55, "USA", adj = .5, cex = .5)
 
 
 ######################################
@@ -223,7 +236,7 @@ lines(c(1998, 2014),c(min(wr1500m$times_sec), min(wr1500m$times_sec)))
 install.packages("maps")
 library("maps")
 
-# world <- map( your code here )
+# world <- map()
 
 #Q11. Use the symbols() function to add circles to the map where
 # the circles are proportional in area to the number of medals
