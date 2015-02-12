@@ -326,7 +326,7 @@ n.sports <- length(unique(athletes$Sport))
 # and again with beside = FALSE. Determine which of these 
 # barplots provides the easiest comparison. 
 
-athTab <- table(athletes$Sports, athletes$Sex)
+athTab <- table(athletes$Sport, athletes$Sex)
 # make two barplots
 barplot(athTab, beside=TRUE)
 barplot(athTab, beside=FALSE)
@@ -364,8 +364,9 @@ best.plot <- athTab2
 # the rows/cols. The resulting barplot should show bars in 
 # increasing height.
 
-orderSport <- order(athletes$Sport)
-athletes$Sport[orderSport,]
+orderSport <- order(table(athletes$Sport))
+barplot(athTab2[,orderSport], beside=TRUE)
+
 
 # Q17. Finally to make the plot more informaation rich, try turning
 # the x-axis labels on their side. To do this, find a parameter
@@ -374,7 +375,7 @@ athletes$Sport[orderSport,]
 # parameter can be added in the call to barplot().
 # Also find and use a parameter to shrink the text for these labels. 
 # Lastly, add a title to the plot.
-
+barplot(athTab2[,orderSport], beside=TRUE, las =3, cex.axis = 1, main = "Athletes By Sport", cex = .75)
 
 # This was the final version of the 4th plot.
 
