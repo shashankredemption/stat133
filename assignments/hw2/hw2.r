@@ -198,7 +198,7 @@ plot(SO2012Ctry$GDP, SO2012Ctry$pop)
 
 GDP_per_person <- SO2012Ctry$GDP/SO2012Ctry$pop
 SO2012Ctry$GDP_per_person <- GDP_per_person
-symbols(log(SO2012Ctry$GDP_per_person), y = log(SO2012Ctry$pop), circles = SO2012Ctry$Total/2)
+symbols(log(SO2012Ctry$GDP_per_person), y = log(SO2012Ctry$pop), circles = SO2012Ctry$Total/2, inches = FALSE)
 
 # Q8. It appears that the countries with no medals are circles too.
 # Remake the plot, this time using *only the countries that won medals*. 
@@ -207,8 +207,8 @@ symbols(log(SO2012Ctry$GDP_per_person), y = log(SO2012Ctry$pop), circles = SO201
 # plotting character.
 
 # your plotting code here
-symbols(log(SO2012Ctry[SO2012Ctry$Total > 0,]$GDP_per_person), y = log(SO2012Ctry[SO2012Ctry$Total > 0,]$pop), circles = SO2012Ctry[SO2012Ctry$Total > 0,]$Total/2)
-symbols(log(SO2012Ctry[SO2012Ctry$Total == 0,]$GDP_per_person), y = log(SO2012Ctry[SO2012Ctry$Total == 0,]$pop), add=TRUE, circles = SO2012Ctry[SO2012Ctry$Total == 0,]$Total/2)
+symbols(log(SO2012Ctry[SO2012Ctry$Total > 0,]$GDP_per_person), y = log(SO2012Ctry[SO2012Ctry$Total > 0,]$pop), circles = SO2012Ctry[SO2012Ctry$Total > 0,]$Total/2, inches = FALSE)
+points(log(SO2012Ctry[SO2012Ctry$Total == 0,]$GDP_per_person), y = log(SO2012Ctry[SO2012Ctry$Total == 0,]$pop), pch=19, cex=.1)
 
 # Q9. Make the plot information rich by adding axis labels, 
 # title, and label 5 of the more interesting points
@@ -216,11 +216,11 @@ symbols(log(SO2012Ctry[SO2012Ctry$Total == 0,]$GDP_per_person), y = log(SO2012Ct
 
 top5 <- SO2012Ctry[which(SO2012Ctry$pop > 180000000),]
 symbols(log(SO2012Ctry[SO2012Ctry$Total > 0,]$GDP_per_person), y = log(SO2012Ctry[SO2012Ctry$Total > 0,]$pop), circles = SO2012Ctry[SO2012Ctry$Total > 0,]$Total, xlab="GDP Per Capita", ylab = "Population", main="Relationship between GDP Per Capita, Population, and Olympic Medals Won")
-symbols(log(SO2012Ctry[SO2012Ctry$Total == 0,]$GDP_per_person), y = log(SO2012Ctry[SO2012Ctry$Total == 0,]$pop), add=TRUE, circles = SO2012Ctry[SO2012Ctry$Total > 0,]$Total)
+points(log(SO2012Ctry[SO2012Ctry$Total == 0,]$GDP_per_person), y = log(SO2012Ctry[SO2012Ctry$Total == 0,]$pop), pch=19, cex=.1)
 text(9.45, y= 19.1, "BRA", adj =.5, cex = .5)
 text(8.6, y= 21.0, "CHN", adj = .5, cex = .5)
 text(8.2, y= 19.15, "IDN", adj = .5, cex = .5)
-text(7.3, y= 20.75, "IND", adj = .5, cex = .5)
+text(7.3, y= 20.7, "IND", adj = .5, cex = .5)
 text(10.8, y = 19.55, "USA", adj = .5, cex = .5)
 
 
@@ -236,7 +236,7 @@ text(10.8, y = 19.55, "USA", adj = .5, cex = .5)
 install.packages("maps")
 library("maps")
 
-# world <- map()
+world <- map(database = "world", fill=TRUE, col="grey")
 
 #Q11. Use the symbols() function to add circles to the map where
 # the circles are proportional in area to the number of medals
@@ -249,10 +249,9 @@ library("maps")
 # pull out the contries that won at least one medal (you will need at least
 # the contries longitude, latitude and Total.)
 
-# wonMedal <- your code here
-# world <- your code here
-# symbols( your code here )
-
+wonMedal <- SO2012Ctry[SO2012Ctry$Total > 0,]
+world <- map(database = "world", fill=TRUE, col="grey")
+symbols(wonMedal$longitude, y= wonMedal$latitude, circles = sqrt(wonMedal$Total), add=TRUE, inches = FALSE)
 
 #Q12. Remake the plot and fill in the circles with a partially
 # transparent gold color. To create this color: 
@@ -269,14 +268,13 @@ library("maps")
 install.packages("RColorBrewer")
 library("RColorBrewer")
 
-# display.brewer.all( your code here )
-# brewer.pal( your code here )
+display.brewer.all()
+brewer.pal(5, 'YlGn')
 
-# myGold <- your selected color
+myGold <- '#FED98E'
 
-#world <- your code here
-#symbols( your code here )
-
+world <- map(database = "world", fill=TRUE, col="grey")
+symbols(wonMedal$longitude, y= wonMedal$latitude, circles = sqrt(wonMedal$Total), add=TRUE, inches = FALSE, bg = myGold)
 
 ## That was the FINAL version of this plot
 
@@ -290,7 +288,7 @@ library("RColorBrewer")
 # and contains information about every athlete who competed 
 # in the Olympics.
 
-# load( )
+load("London2012ALL_ATHLETES.rda")
 
 # There is one observation for each athlete. 
 # (Actually, about 20 athletes have two records if they
@@ -309,15 +307,16 @@ names(athletes)
 # some of the questions below. 
 
 # How many athletes competed in the 2012 Olympics?
-# n.athletes <- your code here
+n.athletes <- length(athletes$Name)
 
 # How many women competed?
+n.women <- length(athletes[which(athletes$Sex == 'F'),]$Name)
 
 # What proportion of the participants were women?
-# frac.women <- your code here
+frac.women <- n.women/n.athletes
 
 # How many sports were there?
-# n.sports <- your code here
+n.sports <- length(unique(athletes$Sport))
 
 
 #Q14. Make a barplot of Sport and Sex that emphasizes the 
@@ -327,12 +326,14 @@ names(athletes)
 # and again with beside = FALSE. Determine which of these 
 # barplots provides the easiest comparison. 
 
-# athTab <- your code here
+athTab <- table(athletes$Sports, athletes$Sex)
 # make two barplots
+barplot(athTab, beside=TRUE)
+barplot(athTab, beside=FALSE)
 
 
 # what should beside be set to, T/F?
-# set.beside <- your answer
+set.beside <- TRUE
 
 ### Barplot with beside = TRUE provides the easiest comparison. 
 
@@ -341,15 +342,16 @@ names(athletes)
 # the beside parameter that you decided was best for the 
 # plot in Q 14. 
 
-# athTab2 <- table()
+athTab2 <- table(athletes$Sex, athletes$Sport)
 # make barplot
+barplot(athTab2, beside=TRUE)
 
 
 # Compare the barplot with (Sex, Sport) vs (Sport, Sex). 
 # Which makes a more interesting visual comparison, plot 1 or 2?
 # store your answer (1 or 2) in best.plot.
 
-# best.plot <- your answer
+best.plot <- athTab2
 
 
 # Q16. Notice that the bars are in alphabetical order by sport.
@@ -362,9 +364,8 @@ names(athletes)
 # the rows/cols. The resulting barplot should show bars in 
 # increasing height.
 
-# orderSport <- your code here
-# barplot( your code here )
-
+orderSport <- order(athletes$Sport)
+athletes$Sport[orderSport,]
 
 # Q17. Finally to make the plot more informaation rich, try turning
 # the x-axis labels on their side. To do this, find a parameter
