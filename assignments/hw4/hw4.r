@@ -74,11 +74,11 @@ recipeConversion <- function(recipe){
   for(i in 1:nrow(recipe)){
     if(recipe[i,]$unit =="cup" | recipe[i,]$unit =="cups"){
       recipe[1,]$amount <- 5*round(recipe[1,]$amount*236.6/5)
-      recipe[i,]$unit <- "ml"
+      recipe[i,]$unit <- as.character("ml")
     }
     if(recipe[i,]$unit =="oz"){
       recipe[1,]$amount <- 5*round(recipe[1,]$amount*28.3/5)
-      recipe[i,]$unit <- "g"
+      recipe[i,]$unit <- as.character("g")
     }
   }
   return(recipe)
