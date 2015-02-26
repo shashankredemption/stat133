@@ -14,9 +14,11 @@
 #   element of <data.list>
 
 listLengths <- function(data.list) {
-
-    # your code here
-
+  lengths <- numeric(0)
+  for(i in 1:length(data.list)){
+    lengths <- append(lengths, length(data.list[[i]]))
+  }
+  return(lengths)
 }
 
 #### Function 2
@@ -31,7 +33,11 @@ listLengths <- function(data.list) {
 #              the column names should be : "x", "x^2", "x^3" etc.
 
 powers <- function(x, k){
-
+  powerMatrix <- numeric(0)
+  for(i in 1:k){
+    powerMatrix <- cbind(powerMatrix, sapply(x, function(x) x^i))
+  }
+  return(powerMatrix)
 }
 
  
@@ -64,7 +70,18 @@ powers <- function(x, k){
 
 # Put your code here
 recipeConversion <- function(recipe){
-
+  recipe <- data.frame(lapply(recipe, as.character), stringsAsFactors=FALSE)
+  for(i in 1:nrow(recipe)){
+    if(recipe[i,]$unit =="cup" | recipe[i,]$unit =="cups"){
+      recipe[1,]$amount <- 5*round(recipe[1,]$amount*236.6/5)
+      recipe[i,]$unit <- "ml"
+    }
+    if(recipe[i,]$unit =="oz"){
+      recipe[1,]$amount <- 5*round(recipe[1,]$amount*28.3/5)
+      recipe[i,]$unit <- "g"
+    }
+  }
+  return(recipe)
 }
 
 
@@ -90,7 +107,12 @@ recipeConversion <- function(recipe){
 # -- The bootstrap variance is the sample variance of mu_1, mu_2, ..., mu_B
 
 bootstrapVarEst <- function(x, B){
-
+  mu_i <- rep(0,B)
+  for(i in 1:B){
+    bootstrapSample <- sample(x ,size = length(x), replace = T)
+    mu_i[i] <- mean(bootstrapSample)
+  }
+  return(var(mu_i))
 }
 
 #### Function #4b
@@ -112,7 +134,11 @@ bootstrapVarEst <- function(x, B){
 # -- The jackknife variance is the sample variance of mu_1, mu_2, ..., mu_n
 
 jackknifeVarEst <- fuction(x){
-
+  mu_i <- rep(0,length(x))
+  for(i in 1:length(x)){
+    mu_i[i] <- (mean(x)*length(x)-x[i])/(length(x)-1)
+  }
+  return(var(mu_i))
 }
 
 #### Function #4c
@@ -127,8 +153,13 @@ jackknifeVarEst <- fuction(x){
 
 # Note: this function calls the previous two functions.
 
-samplingVarEst <- function(  ){
-
+samplingVarEst <- function(x, type="bootstrap" ){
+  if(type=="jackknife"){
+    return jackknifeVarEst(x)
+  }
+  else{
+    return bootstrapVarEst(x, 1000)
+  }
 }
 
 
