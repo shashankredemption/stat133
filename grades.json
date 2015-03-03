@@ -1,0 +1,23 @@
+{
+    "email": "sbhargava@berkeley.edu", 
+    "github_name": "shashankredemption", 
+    "grades": {
+        "hw1": {
+            "note": "", 
+            "hash": "997baec9de59ff76dfb8700fcb6e740410822a79", 
+            "earned": 20, 
+            "possible": 20, 
+            "penalty": 0, 
+            "parts": {
+                "hw1": {
+                    "possible": 20, 
+                    "earned": 20
+                }
+            }
+        }
+    }, 
+    "login": "shashankredemption", 
+    "name": "Shashank Bhargava", 
+    "status": "enrolled", 
+    "url": "git@github.com:shashankredemption/stat133.git"
+}
