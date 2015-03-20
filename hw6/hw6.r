@@ -28,17 +28,33 @@
 #                 non-adopter, else 1 (so once a row turns to 1 it stays as 1).
 
 sim.doctors <- function(initial.doctors, n.doctors, n.days, p){
-
-  # Set up the output variable, define it as a matrix then use initial.doctors
-  # to set the first column (day)
-
-  # Run a simulation for <n.days> (use a for loop).  In the loop:
-  # 1) pick two random doctors
-  # 2) check if one has adopted the other hasn't
-  # 3) convert the non-adopter with probability p
-
-  # return the output
-
+  x <- matrix(nrow = n.doctors, ncol = n.days)
+  x[,1] <- initial.doctors
+  for(i in 1:(n.days-1)){
+    first <- sample(1:n.doctors, 1)
+    second <- sample(1:n.doctors, 1)
+    n.rv <- x[,i]
+    while(first == second){
+        second <- sample(1:n.doctors, 1)
+      }
+      y<-c(x[first,i], x[second,i])
+      if(y[1]== 1 && y[2] == 0){
+        p <- p*100
+        z <- sample(1:100, 1)
+        if (p >= z){
+          n.rv[second] <- 1
+        }
+      }
+      if(y[1]== 0 && y[2] == 1){
+        p <- p*100
+        z <- sample(1:100, 1)
+        if (p >= z){
+          n.rv[first] <- 1
+        }
+      }
+    x[,i+1] <- n.rv
+    }
+  return(x)
 }
 
 # When you test your function you have to generate <initial.doctors> and
