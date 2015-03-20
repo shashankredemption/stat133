@@ -61,9 +61,20 @@ sim.doctors <- function(initial.doctors, n.doctors, n.days, p){
 # pick values for the other input parameters.
 
 set.seed(42)
+initial.doctors<-c(0,0,0,0,0,0,0,0,0,1)
+results1 <- sim.doctors(initial.doctors, 10, 10, .1)
+results2 <- sim.doctors(initial.doctors, 10, 10, .3)
+results3 <- sim.doctors(initial.doctors, 10, 10, .5)
+results4 <- sim.doctors(initial.doctors, 10, 10, .7)
+results5 <- sim.doctors(initial.doctors, 10, 10, .9)
+
 # Generate a value for <initial.doctors> that has 10% 1s and 90% 0s.
 # Run your function for at least 5 different values of <p> and plot
 # on x-axis: days,
 # on y-axis : the number of doctors that have already adopted the drug, on that day
 # Put all 5 lines in one figure (e.g. use first plot() then lines() for the subsequent lines)
-
+plot(results1)
+lines(results2)
+lines(results3)
+lines(results4)
+lines(results5)
