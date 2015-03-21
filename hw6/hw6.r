@@ -57,24 +57,39 @@ sim.doctors <- function(initial.doctors, n.doctors, n.days, p){
   return(x)
 }
 
+matrixer<- function(m){
+  number <- numeric(0)
+  for(j in 1:ncol(m)){
+    number <- append(number, sum(m[,j]==1))
+  }
+  return(number)
+}
+
+counter <- function(m){
+  counts <- numeric(0)
+  for(k in 1:length(m)){
+    counts <- append(counts, k)
+  }
+  return(counts)
+}
 # When you test your function you have to generate <initial.doctors> and
 # pick values for the other input parameters.
 
 set.seed(42)
 initial.doctors<-c(0,0,0,0,0,0,0,0,0,1)
-results1 <- sim.doctors(initial.doctors, 10, 10, .1)
-results2 <- sim.doctors(initial.doctors, 10, 10, .3)
-results3 <- sim.doctors(initial.doctors, 10, 10, .5)
-results4 <- sim.doctors(initial.doctors, 10, 10, .7)
-results5 <- sim.doctors(initial.doctors, 10, 10, .9)
+results1 <- matrixer(sim.doctors(initial.doctors, 10, 10, .1))
+results2 <- matrixer(sim.doctors(initial.doctors, 10, 10, .3))
+results3 <- matrixer(sim.doctors(initial.doctors, 10, 10, .5))
+results4 <- matrixer(sim.doctors(initial.doctors, 10, 10, .7))
+results5 <- matrixer(sim.doctors(initial.doctors, 10, 10, .9))
 
 # Generate a value for <initial.doctors> that has 10% 1s and 90% 0s.
 # Run your function for at least 5 different values of <p> and plot
 # on x-axis: days,
 # on y-axis : the number of doctors that have already adopted the drug, on that day
 # Put all 5 lines in one figure (e.g. use first plot() then lines() for the subsequent lines)
-plot(results1)
-lines(results2)
-lines(results3)
-lines(results4)
-lines(results5)
+plot(x= counter(initial.doctors), y = results1, xlab = "Days", ylab = "Doctors", type = "n")
+lines(x= counter(initial.doctors), y = results2, col = "red")
+lines(x= counter(initial.doctors), y = results3, col = "blue")
+lines(x= counter(initial.doctors), y = results4, col = "yellow")
+lines(x= counter(initial.doctors), y = results5, col = "green")
