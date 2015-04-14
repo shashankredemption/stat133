@@ -133,7 +133,7 @@ bootstrapVarEst <- function(x, B){
 #     for this reduced sample calculate the sample mean (get mu_1, mu_2, ..., mu_n)
 # -- The jackknife variance is the sample variance of mu_1, mu_2, ..., mu_n
 
-jackknifeVarEst <- fuction(x){
+jackknifeVarEst <- function(x){
   mu_i <- rep(0,length(x))
   for(i in 1:length(x)){
     mu_i[i] <- (mean(x)*length(x)-x[i])/(length(x)-1)
@@ -154,12 +154,12 @@ jackknifeVarEst <- fuction(x){
 # Note: this function calls the previous two functions.
 
 samplingVarEst <- function(x, type="bootstrap" ){
-  if(type=="jackknife"){
-    return jackknifeVarEst(x)
-  }
-  else{
-    return bootstrapVarEst(x, 1000)
-  }
+    #  if(type=="jackknife"){
+    #    return jackknifeVarEst(x)
+    #  }
+    #  else{
+    #   return bootstrapVarEst(x, 1000)
+    #  }
 }
 
 
