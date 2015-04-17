@@ -9,6 +9,11 @@
 #   <num.brac>: an integer indicating how many elements of <chvec> contain the "["
 #     symbol. For example: numBracElements(c('digit', '[:digit:]', '[]')) should return 2
 
+numBracElements<- function(chvec){
+  brac <- grep("\\[", chvec)
+  num.brac <- length(brac)
+  return(num.brac)
+}
 
 
 
@@ -19,7 +24,15 @@
 #
 # and return the following
 #   <total>: A single number (the maximum of all digits in chvec)
-
+maxDigits <- function(chvec) {
+  chvec <- unlist(strsplit(chvec, split = ""))
+  chvec <- unlist(strsplit(gsub("[^[:digit:] ]", "", chvec), " +"))
+  total <- max(chvec)
+  if(is.null(total)) {
+    total <- 0
+  }
+  return(total)
+}
 
 
 # Some test cases:
@@ -30,18 +43,24 @@ all.equal(maxDigits("abcdefg"), 0)
 
 # Write a function called hisToHer that converts every instance of 
 # him in a string to her; every instance of he to she and every instance 
-# of his to hers. You can assume everything is lower case. Be careful not 
+# of his to her. You can assume everything is lower case. Be careful not 
 # to replace words that contain him/he/his (eg you don't want to
 # replace the with ther). Your function should take the argument
 #   <chvec>: A character vector
 #
 # and return
 #   <herchvec>: The same character vector with the required substitutions.
+hisToHer <- function(chvec) {
+  herchvec <- gsub(" he ", " she ",chvec)
+  herchvec <- gsub(" his "," her ", herchvec)
+  herchvec <- gsub(" him "," her ", herchvec)
+  return(herchvec)
+}
 
 
 # A test case
 all.equal(
-  hisToHer("he went to the store his mother gave him"), 
+  hisToHer("he went to the store his mother gave him shis shim"), 
   "she went to the store her mother gave her"
 )
 
@@ -58,4 +77,10 @@ all.equal(
 #  <letter> The most common letter or letters in the string.
 # For example mostCommonLetter("aabbccccdddd") should return 
 # [1] "c" "d"
+mostCommonLetter <- function(chvec) {
+  letter <- list()
+  chvec <- unlist(strsplit(gsub("[^[:alpha:] ]", "", chvec)), " +")
+  letter <- names(which.max(table(chvec))) 
+  return(letter)
+}
 
