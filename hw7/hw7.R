@@ -271,7 +271,7 @@ speechesDF <- cbind(speechesDF, yr, month, words, chars, sentences)
 presidentWordMat <-  matrix(ncol=length(speechesDF$Pres), nrow= length(uniqueWords))
 for (j in 1:length(speechesDF$Pres))
   for(i in 1:length(uniqueWords)) {
-    presidentWordMat[i,j] <- speechesL[j][speechesL[i] == uniqueWords[i]]
+    presidentWordMat[j,i] <- speechWords[j][speechWords == uniqueWords[i]]
   }
 }
 
@@ -287,7 +287,7 @@ for (j in 1:length(speechesDF$Pres))
 # [docFreq]: vector of the same length as [uniqueWords], 
 # count the number of presidents that used the word
 
-  docFreq <- 
+  docFreq <- lapply(uniqueWords, grep)
     
 # Call the function computeSJDistance() with the arguments
 # presidentWordMat, docFreq and uniqueWords
