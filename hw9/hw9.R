@@ -35,7 +35,8 @@ head(mtcars)
 # The column should be called "model" and it should have the names of car models 
 # (i.e. the current row names).
 
-# < your code here>
+mtcars <- setNames(cbind(rownames(mtcars), mtcars, row.names = NULL), 
+         c("model", "mpg", "cyc", "disp", "hp", "drat", "wt", "qsec", "vs", "am", "gear", "carb"))
 
 # Now make a bubble chart using the following instructions:
 # Use 'model', i.e. car model names as labels of bubbles;
@@ -44,13 +45,13 @@ head(mtcars)
 # Use levels of 'gear' to represent color of bubbles;
 # Finally use the 'options' argument to add axis labels and main title.
 
-# optionlist <- < your code here>
-# bub <- gvisBubbleChart( < your code here >)
+optionlist <- list(main = "hi", xlab = "hihi")
+bub <- gvisBubbleChart(mtcars, idvar = "model", xvar = "disp", yvar = "mpg", colorvar = "gear", sizevar = "hp", optionlist)
 
 # Now plot your bubble chart output, 'bub', 
 # the chart will show up in a new tab in your web browser.
 
-# < your code here>
+plot(bub)
 
 ##### Motion Chart
 # For examples of motion chart, see: 
@@ -68,12 +69,12 @@ load("WorldBank.RData")
 # containing only the following columns from WordBank:
 # country, year, fertility rate, life expectancy, population and region.
 
-# WorldDat <- < your code here>
+WorldDat <- data.frame(WorldBank$country, WorldBank$year, WorldBank$fertility.rate, WorldBank$life.expectancy, WorldBank$population, WorldBank$population, WorldBank$region)
 
 # As you can see, there are missing values in this data frame.
 # Get rid of all rows with one or more NAs.
 
-# < your code here >
+WorldDat <- na.omit(WorldDat)
 
 # Now make the motion chart using <WorldDat>:
 # (at this point is should have 6 columns and should be free of missing values)
@@ -83,7 +84,7 @@ load("WorldBank.RData")
 # Notice that you can change theses vectors on the generated motion chart, 
 # for now just use the above instructions as default.
 
-# Motion <- gvisMotionChart( < your code here > )
+Motion <- gvisMotionChart(WorldDat, idvar = "country", timevar = "year", xvar = "life.exepectany", yvar = "fertility.rate", colorvar = "region", sizevar = "population")
 
 # Plot your motion chart. It should appear in your web browser. Play around with it!
 plot(Motion)

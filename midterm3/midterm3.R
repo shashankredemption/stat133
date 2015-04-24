@@ -26,7 +26,7 @@ numBracElements<- function(chvec){
 #   <total>: A single number (the maximum of all digits in chvec)
 maxDigits <- function(chvec) {
   chvec <- unlist(strsplit(chvec, split = ""))
-  chvec <- unlist(strsplit(gsub("[^[:digit:] ]", "", chvec), " +"))
+  as.character(chvec) <- unlist(strsplit(gsub("[^[:digit:] ]", " ", chvec), " +"))
   total <- max(chvec)
   if(is.null(total)) {
     total <- 0
