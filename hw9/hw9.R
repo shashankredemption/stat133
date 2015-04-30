@@ -45,7 +45,7 @@ mtcars <- setNames(cbind(rownames(mtcars), mtcars, row.names = NULL),
 # Use levels of 'gear' to represent color of bubbles;
 # Finally use the 'options' argument to add axis labels and main title.
 
-optionlist <- list(main = "hi", xlab = "hihi")
+optionlist <- list(title = "Car Models from 1974 Motor Trend", hAxis = '{title: "Dispersion"}', vAxis = '{title: "MPG"}')
 bub <- gvisBubbleChart(mtcars, idvar = "model", xvar = "disp", yvar = "mpg", colorvar = "gear", sizevar = "hp", optionlist)
 
 # Now plot your bubble chart output, 'bub', 
@@ -84,7 +84,7 @@ WorldDat <- na.omit(WorldDat)
 # Notice that you can change theses vectors on the generated motion chart, 
 # for now just use the above instructions as default.
 
-Motion <- gvisMotionChart(WorldDat, idvar = "country", timevar = "year", xvar = "life.exepectany", yvar = "fertility.rate", colorvar = "region", sizevar = "population")
+Motion <- gvisMotionChart(WorldDat, idvar = "WorldBank.country", timevar = "WorldBank.year", xvar = "WorldBank.life.expectancy", yvar = "WorldBank.fertility.rate", colorvar = "WorldBank.region", sizevar = "WorldBank.population")
 
 # Plot your motion chart. It should appear in your web browser. Play around with it!
 plot(Motion)
