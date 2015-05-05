@@ -20,6 +20,11 @@ set.seed(123456)
 # We've set the default inputs to k=2 and B=100
 
 dice_sum <- function(k=2, B=100){
+  replicate(B, {
+    dice_rolls <- sample(1:6, k, replace = TRUE)
+    out <- sum(dice_rolls)
+    return(sum(out))})
+  
 
 }
 
@@ -76,5 +81,5 @@ updateDate <- function(dates, old.yr) {
 # a vector of the same length with only the first [k] characters from the orignal vector entries.
 
 abbreviate <- function(vector, k){
-
+subtr(vector, start = 1, stop = k)
 }

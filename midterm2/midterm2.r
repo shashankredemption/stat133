@@ -121,6 +121,8 @@ points(virginica$Petal.Length, virginica$Petal.Width, col = "black")
 # [3 pt]
 # Make a scatterplot of ( sepal length / petal length) as a function of index (order)
 # Color the plotting symbol by Species (any 3 colors)
+plot(1: nrow(iris), iris$Sepal.Length/iris$PetalLength,
+     col = iris$Species)
 
 
 ##  apply statements
