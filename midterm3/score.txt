@@ -1,0 +1,21 @@
+Total: 16/20
+
+Function 1
+5/5
+
+Function 2
+4/5
+Replacing line 29 with 
+  chvec <- unlist(strsplit(gsub("[^[:digit:] ]", " ", chvec), " +"))
+yields a workable solution (although the max it returns will be a character
+rather than numeric but that is OK)
+
+Function 3
+4/5
+This misses some cases e.g. “he saw him” -> “he saw him”
+
+Function 4
+3/5
+There are syntax errors and because you use which.max your code 
+would note account for tied most common letters.
+
