@@ -347,7 +347,7 @@ PermDiff <- function(cases, controls, k=5000){
      cases <- sample(total, k)
      controls <- sample(total, length(total) -k)
   rv[i]<- mean(cases) - mean(controls)
-}
+#}
 return(rv)
 }
 
@@ -402,10 +402,10 @@ NumJackpot <- function(k, B) {
 # For B = 1000 and each value of k = 100, 500, 1000, 5000
 # Plot a histogram of the output from NumJackpot (i.e. four histograms)
 par(mfrow=c(2,2))
-hist(NumJackpot(100, 1000))
-hist(NumJackpot(500, 1000))
-hist(NumJackpot(1000, 1000))
-hist(NumJackpot(5000, 1000))
+hist(NumJackpot(100, 50))
+hist(NumJackpot(500, 50))
+hist(NumJackpot(1000, 50))
+hist(NumJackpot(5000, 50))
 
 
 
@@ -445,7 +445,7 @@ text5 <- grep("[!?]", phrases)
 
 # [2 pts]
 # Create a vector [phrases2] where you have replaced the first instance of the letter "a" in each word with "@"
-phrases2 <- gsub("a", "@")
+#phrases2 <- gsub("a", "@")
 
 
 # [2 pts]
