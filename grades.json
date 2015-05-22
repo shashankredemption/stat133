@@ -44,6 +44,19 @@
                     "earned": 6
                 }
             }
+        }, 
+        "midterm4": {
+            "note": "", 
+            "hash": "ba50cb7f586efae96411e262cd0e7f9a4c1eae29", 
+            "earned": 5, 
+            "possible": 27, 
+            "penalty": 0, 
+            "parts": {
+                "midterm4": {
+                    "possible": 30, 
+                    "earned": 5
+                }
+            }
         }
     }, 
     "login": "shashankredemption", 
